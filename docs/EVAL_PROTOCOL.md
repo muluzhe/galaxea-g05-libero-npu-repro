@@ -49,7 +49,7 @@ results/full_libero/<YYYYmmdd_HHMMSS_PID>/
     └── videos/*.mp4          # 每 trial 一段，文件名含任务描述/episode/success 标记
 ```
 
-原始运行产物（JSON/日志/视频）留档于运行机器；本仓库发布脱敏汇总 `results/summary.json`。
+原始运行产物（JSON/日志/视频）留档于验证服务器；本仓库发布脱敏汇总 `results/summary.json`。
 
 ## 四、结果记录与对比规范
 

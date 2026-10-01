@@ -1,6 +1,6 @@
 # 实测视频样例
 
-以下 9 段视频截选自本机 2000 段全量 rollout 留档，作为 NPU 闭环验证的直接证据分发。每段画面左侧为主视角相机、右侧为腕部相机（256×256×2，30fps）。其中前 4 段与 `xiaohongshu/images/03_rollouts.png` 的截帧画面一一对应。
+以下 9 段视频截选自验证服务器上的 2000 段全量 rollout 留档，作为 NPU 闭环验证的直接证据分发。每段画面左侧为主视角相机、右侧为腕部相机（256×256×2，30fps）。其中前 4 段与 `xiaohongshu/images/03_rollouts.png` 的截帧画面一一对应。
 
 | 文件 | Suite | 结果 | 任务 |
 |---|---|---|---|
@@ -14,4 +14,4 @@
 | `libero_10_moka_pots_stove_ep0_success.mp4` | libero_10 | 成功 | put both moka pots on the stove |
 | `libero_goal_open_top_drawer_bowl_ep20_failure.mp4` | libero_goal | 失败 | open the top drawer and put the bowl inside（23 次失手之一，如实收录） |
 
-完整 2000 段视频（约 400MB）因体积留档于运行机器；文件名 success/failure 标记已与 `results/summary.json` 逐套件核对一致。
+完整 2000 段视频（约 400MB）因体积留档于验证服务器；文件名 success/failure 标记已与 `results/summary.json` 逐套件核对一致。

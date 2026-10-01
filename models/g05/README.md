@@ -18,4 +18,4 @@ git apply --check models/g05/g05_npu.patch
 git apply models/g05/g05_npu.patch
 ```
 
-CUDA 依赖回退均为官方代码自带实现：ViT 注意力 → SDPA；Gated DeltaNet → 纯 PyTorch chunk/recurrent；ActionCodec fp32 → SDPA。补丁不含权重、令牌或本机路径。
+CUDA 依赖回退均为官方代码自带实现：ViT 注意力 → SDPA；Gated DeltaNet → 纯 PyTorch chunk/recurrent；ActionCodec fp32 → SDPA。补丁不含权重、令牌或任何绝对路径。

@@ -64,7 +64,7 @@ bash scripts/run_g05_full_libero.sh
 
 **本仓库直接分发 9 段代表性实测视频**（[`videos/`](videos/)，约 2MB）：四套件各 2 段成功案例（其中 4 段与 `xiaohongshu/images/03_rollouts.png` 截帧一一对应），外加 1 段失败案例如实收录，清单见 [`videos/README.md`](videos/README.md)。
 
-完整 2000 段 rollout 视频在本机留档：每段经 ffmpeg 实际解码首帧核验（2000/2000 通过），每套件抽首/中/尾三段多帧解码（12/12 通过），文件名 success/failure 标记与结果 JSON 逐套件核对一致。
+完整 2000 段 rollout 视频留档于验证服务器：每段经 ffmpeg 实际解码首帧核验（2000/2000 通过），每套件抽首/中/尾三段多帧解码（12/12 通过），文件名 success/failure 标记与结果 JSON 逐套件核对一致。
 
 ## 仓库结构
 

@@ -41,7 +41,7 @@
 
 ### 当前判断
 
-**技术上有条件可行，尚未验证。** 本项目已有 Ascend 910B4 + torch_npu + OSMesa + LIBERO 基础设施，但 G0.5 官方路径以 CUDA 12.8 和 CUDA 原生扩展为前提，且其自回归/ActionCodec/视觉与 attention 代码与现有 X-VLA/OpenVLA/PI0.5 适配链路不同，不能直接复用现有 server 或动作 schema。
+**技术上有条件可行，尚未验证。** 本项目已有 Ascend 910B4 + torch_npu + OSMesa + LIBERO 基础设施，但 G0.5 官方路径以 CUDA 12.8 和 CUDA 原生扩展为前提，且其自回归/ActionCodec/视觉与 attention 代码与本项目此前适配过的模型链路均不同，不能直接复用。
 
 ### 建议顺序（上传完成后执行）
 
@@ -55,7 +55,7 @@
 
 - **权重访问阻塞**：官方 HF `G05/g05-libero` 文件页需要登录并同意共享联系信息，本次未授权访问，无法确认实际下载链路。
 - **NPU 后端阻塞**：官方安装要求 CUDA 12.8 及 `flash-attn-4`、`flash-linear-attention` 原生扩展，官方资料未给出 torch_npu 支持矩阵或 NPU 替代实现。
-- **资源与协议阻塞**：官方默认四 suite × 每 task 50 trials，且需保存视频；当前项目有 PI0.5/OpenVLA 并发资源，必须等上传完成并安排独立 NPU、端口、输出目录后再运行。
+- **资源与协议阻塞**：官方默认四 suite × 每 task 50 trials，且需保存视频；当时机器上有其他验证任务占用 NPU，必须等其完成并安排独立 NPU、端口、输出目录后再运行。
 - **证据边界**：本次只有官方公开资料核对，没有权重加载、单 task smoke 或任何 LIBERO rollout；因此状态是“研究完成、验证未开始”。
 
 ## 可信来源
@@ -87,8 +87,8 @@
 - Python 3.10.20、torch 2.7.1+cpu、torch_npu 2.7.1.post2、transformers 4.57.1（官方要求版本）、numpy 1.26.4。
 - CUDA 原生扩展全部未安装：flash-attn-4、flash-linear-attention、causal-conv1d、liger-kernel、bitsandbytes、deepspeed。
 - 代码核实（推理链路）：ViT 注意力走 SDPA 回退（vision.py 官方自带）；Gated DeltaNet 走纯 PyTorch chunk/recurrent 回退（gated_deltanet.py 官方自带，`linear_attn_backend: torch`）；ActionCodec fp32 天然走 SDPA；`inferencer.py` autocast 已 device-aware（cuda/npu），`--no-bf16` 为 fp32 验证模式。
-- 客户端依赖补齐：hf_libero 0.1.4、robosuite 1.4.0、mujoco 3.3.2、bddl 1.0.1、gym 0.22.0、rootutils、websockets 16.0、msgpack；修复 cffi 被 ModelArts cp39 版本劫持问题（g05 环境安装 cffi 2.1.1 cp310）。
-- server 与客户端同环境运行，OSMesa 软件渲染（MUJOCO_GL=osmesa 等，与 PI0.5 链路同源）。
+- 客户端依赖补齐：hf_libero 0.1.4、robosuite 1.4.0、mujoco 3.3.2、bddl 1.0.1、gym 0.22.0、rootutils、websockets 16.0、msgpack；修复 cffi 被云平台预装 cp39 版本劫持问题（g05 环境安装 cffi 2.1.1 cp310）。
+- server 与客户端同环境运行，OSMesa 软件渲染（MUJOCO_GL=osmesa 等，复用项目既有渲染方案）。
 
 ### 3. NPU 算子问题与修复（EZ1001）
 

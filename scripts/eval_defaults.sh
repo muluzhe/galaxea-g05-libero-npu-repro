@@ -2,7 +2,7 @@
 # LIBERO 评测统一默认参数（所有模型编排脚本应 source 本文件）
 #
 # 基准：LIBERO 官方 benchmark 协议（每 task 50 个初始状态）与主流 VLA 论文
-# （OpenVLA / G0.5）沿用的一致设置。各模型论文特有的固有参数（动作空间、
+# （含 G0.5）沿用的一致设置。各模型论文特有的固有参数（动作空间、
 # chunk 步数、精度）不在此统一，见 docs/EVAL_PROTOCOL.md 的"模型固有参数"。
 #
 # 用法：source scripts/eval_defaults.sh

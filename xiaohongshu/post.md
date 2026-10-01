@@ -33,7 +33,7 @@
 改动收敛成12个文件的patch，git apply就能复现，已开源👇
 github.com/muluzhe/galaxea-g05-libero-npu-repro
 
-2000段rollout视频全部留档：每段都做了实解码核验，另抽12段多帧校验全过；日志、JSON、manifest齐全，欢迎来查作业👀
+2000段rollout视频全部留档：每段都做了实解码核验，另抽12段多帧校验全过；其中9段代表性实测视频（含1段失败案例）已随仓库开源，日志、JSON、manifest齐全，欢迎来查作业👀
 
 国产算力跑具身智能，这条链路是真的通了。
 

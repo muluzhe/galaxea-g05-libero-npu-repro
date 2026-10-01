@@ -62,7 +62,9 @@ bash scripts/run_g05_full_libero.sh
 
 ## 视频证据
 
-2000 段 rollout 视频全部在本机留档（体积与许可约束不入库）：每段经 ffmpeg 实际解码首帧核验（2000/2000 通过），每套件抽首/中/尾三段多帧解码（12/12 通过），文件名 success/failure 标记与结果 JSON 逐套件核对一致。截帧样例见 [`xiaohongshu/images/`](xiaohongshu/images/)。
+**本仓库直接分发 9 段代表性实测视频**（[`videos/`](videos/)，约 2MB）：四套件各 2 段成功案例（其中 4 段与 `xiaohongshu/images/03_rollouts.png` 截帧一一对应），外加 1 段失败案例如实收录，清单见 [`videos/README.md`](videos/README.md)。
+
+完整 2000 段 rollout 视频在本机留档：每段经 ffmpeg 实际解码首帧核验（2000/2000 通过），每套件抽首/中/尾三段多帧解码（12/12 通过），文件名 success/failure 标记与结果 JSON 逐套件核对一致。
 
 ## 仓库结构
 
@@ -73,6 +75,7 @@ bash scripts/run_g05_full_libero.sh
 ├── docs/EVAL_PROTOCOL.md           # 评测协议规范
 ├── docs/G05_TRACKING.md            # 迁移过程全记录
 ├── results/summary.json            # 逐 task 结构化结果
+├── videos/                         # 9 段代表性实测视频（含 1 段失败案例）
 └── xiaohongshu/                    # 作品发布图文
 ```
 

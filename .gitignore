@@ -2,7 +2,6 @@ __pycache__/
 *.py[cod]
 .DS_Store
 *.log
-*.mp4
 *.pt
 *.safetensors
 kernel_meta/

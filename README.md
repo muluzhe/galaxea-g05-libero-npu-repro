@@ -76,6 +76,7 @@ bash scripts/run_g05_full_libero.sh
 ├── docs/G05_TRACKING.md            # 迁移过程全记录
 ├── results/summary.json            # 逐 task 结构化结果
 ├── videos/                         # 9 段代表性实测视频（含 1 段失败案例）
+├── blog/ascend_blog.md             # 昇腾社区技术博客（NPU 适配与性能对比）
 └── xiaohongshu/                    # 作品发布图文
 ```
 

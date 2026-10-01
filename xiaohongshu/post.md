@@ -10,31 +10,31 @@
 
 ---
 
-**标题**（19 字内）：零CUDA！昇腾NPU全量复现G0.5
+**标题**（19 字）：G0.5 昇腾NPU复现：98.85%
 
 **正文**：
 
-星海图G05开源共创挑战，我交作业了🎯
+星海图 G05「开源共创」挑战作品：G0.5 LIBERO 评测的昇腾 NPU 全量复现。
 
-官方G0.5只给了CUDA版本，我把整套LIBERO仿真验证搬到了华为昇腾910B4上——没有GPU、没有CUDA，一个flash-attn都没装，跑完了官方全量协议：
+官方栈依赖 CUDA 12.8 与 flash-attn-4 / flash-linear-attention。本工作将评测链路迁移至 Ascend 910B4（CANN 8.5.2/torch-npu），零 CUDA 原生扩展，按官方全量协议执行。
 
-📊 4大套件 × 10任务 × 50次 = 2000个episode
-总成功率 98.85%（1977/2000）
-官方技术报告：98.9%
-我之前在RTX4090上也跑过是100%，但那是10-trials缩减协议只有400次，样本小不能直接对比——所以这次NPU直接上满50-trials全量
+协议：4 suite × 10 task × 50 trials = 2000 episodes；horizon 220/280/300/520；chunk = 10；seed 42；fp32；逐 episode 留存视频。
 
-50次尝试并行跑，一个任务平均20分钟内拿下，机械臂抓碗、开抽屉、放书全流程丝滑✨
+NPU 结果（fp32，SDPA + 纯 PyTorch 回退）：
+· spatial 496/500（99.2%）· object 500/500（100.0%）
+· goal 490/500（98.0%）· libero_10 491/500（98.2%）
+· 总计 1977/2000 = 98.85%
 
-🔧 迁移拆了三道关：
-① 昇腾算子最多8维张量，视觉patch化是9维的→拆成等价低维链，逐位比对bitwise equal
-② CUDA原生扩展全部回退：flash-attn→SDPA，FLA→纯PyTorch（官方自带回退，不是我硬改的）
-③ NPU走fp32全精度，规避bf16数值风险
+对照：官方技术报告 98.9%（CUDA/bf16）；同作者 RTX 4090 复现 100.0%（400/400，10-trials 缩减协议，非等价比较）。
 
-改动收敛成12个文件的patch，git apply就能复现，已开源👇
+迁移要点：
+1. 昇腾 ACL 算子张量上限 8 维，官方视觉 patch 化为 9 维 reshape+permute，触发 EZ1001；重写为等价 ≤8 维链，随机张量逐位比对一致。
+2. 注意力后端回退：flash-attn → SDPA；Gated DeltaNet → 官方纯 PyTorch 实现；liger-kernel 仅训练路径。
+3. autocast 设备感知 + fp32 验证模式（--no-bf16）。
+
+全部改动收敛为 12 文件补丁（基线 commit 89f2322，git apply 可复现）：
 github.com/muluzhe/galaxea-g05-libero-npu-repro
 
-2000段rollout视频全部留档：每段都做了实解码核验，另抽12段多帧校验全过；其中9段代表性实测视频（含1段失败案例）已随仓库开源，日志、JSON、manifest齐全，欢迎来查作业👀
+证据链：9 段代表性视频（含 1 段失败案例）随仓库分发；2000 段全量视频首帧实解码 2000/2000，多帧抽检 12/12；success/failure 标记与结果 JSON 逐套件核对一致。
 
-国产算力跑具身智能，这条链路是真的通了。
-
-#G05 #星海图 #具身智能 #昇腾 #国产算力 #NPU #开源 #机器人 #VLA #大模型 #程序员日常 #技术分享
+#G05 #星海图 #具身智能 #昇腾 #国产算力 #NPU #开源 #机器人 #VLA #技术分享

@@ -1,20 +1,12 @@
-# 真实终端证据
+# 真实终端运行证据
 
-本目录用于保存由验证服务器终端直接截取的公开证据截图。
+本目录中的 PNG 均由验证服务器终端实际运行命令后手动截取，不是生成式信息卡。截图已避免本地绝对路径、个人信息、访问令牌、PID、端口和动态客户端地址。
 
-建议保存以下文件：
+| 文件 | 内容 |
+|---|---|
+| `01_real_result_terminal.png` | 由公开 `results/summary.json` 读取的四套件逐项统计与总结果 |
+| `02_real_npu_log_start.png` | 真实 server 启动记录：模型加载到 `npu:0`、fp32、chunk(10)、纯 PyTorch/SDPA 回退 |
+| `02_real_npu_log_finished.png` | 真实四套件 client 运行完成记录与结果保存信息 |
+| `03_real_config_terminal.png` | 真实复现配置：硬件、精度、seed、trials、horizon、action chunk、视频证据范围 |
 
-1. `01_terminal_result.png`：终端执行结果汇总，展示四套件成功率和总结果
-2. `02_terminal_npu_server.png`：真实 server.log 终端输出，展示 `loaded on npu:0`、fp32、batch/chunk 配置
-3. `03_terminal_config.png`：真实终端输出的评测 manifest、模型配置和关键参数
-
-截图应来自已经完成的 G0.5 Ascend 910B4 验证结果，不需要重新运行 2000 个 episode。推荐直接使用下面的复现查看命令生成输出后截图：
-
-```bash
-cd /path/to/galaxea-g05-libero-npu-repro
-bash evidence/show_terminal_evidence.sh
-```
-
-命令只读取公开汇总和脱敏日志，不启动模型、不修改结果、不下载权重。
-
-原始 server/client 日志不直接公开，因为包含本地路径、进程信息、端口和动态运行地址。完整 rollout 视频和原始运行产物仍保留在验证服务器；仓库 `videos/` 目录提供代表性视频样例。
+原始完整日志包含运行服务器路径、进程信息、端口和动态地址，不直接公开；完整原始 JSON、日志和 2000 段视频留档于验证服务器。公开仓库同时提供脱敏日志、结果汇总和 9 段代表性 rollout 视频。
